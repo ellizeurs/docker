@@ -7,6 +7,10 @@ RUN pip install xlrd
 RUN pip install openpyxl
 RUN pip install lxml
 RUN pip install pyswarm
+RUN pip install tensorflow
+RUN pip install PyWavelets
+RUN pip install python-picard
+RUN pip install seaborn
 
 # Instale o Git
 RUN apt-get update && apt-get install -y git
@@ -18,6 +22,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 # Instale dependências adicionais
 RUN pip install jupyterlab
 RUN pip install ipywidgets
+
+# Instale TensorFlow
 
 # Exponha a porta do Jupyter Lab
 EXPOSE 10101
