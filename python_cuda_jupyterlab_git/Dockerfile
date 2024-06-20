@@ -9,4 +9,5 @@ RUN pip install jupyterlab jupyterlab-git==0.50.0
 
 # Configuração para permitir que JupyterLab seja acessível de qualquer lugar (não apenas localhost)
 EXPOSE 8888
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+# Inicie o Jupyter Lab ao iniciar o contêiner
+CMD ["jupyter", "lab", "--port=8888", "--ServerApp.iopub_msg_rate_limit=1000000000","--no-browser", "--allow-root"]
