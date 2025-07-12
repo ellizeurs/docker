@@ -1,0 +1,40 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+
+ErrorDocument 400 /error/400
+ErrorDocument 401 /error/401
+ErrorDocument 403 /error/403
+ErrorDocument 404 /error/404
+ErrorDocument 405 /error/405
+ErrorDocument 408 /error/408
+ErrorDocument 410 /error/410
+ErrorDocument 500 /error/500
+ErrorDocument 502 /error/502
+ErrorDocument 503 /error/503
+ErrorDocument 504 /error/504
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} \.css|\.js$
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule .* - [E=LAST_MODIFIED:%{TIME}]
+
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=0, must-revalidate"
+        Header set Last-Modified "expr=%{LAST_MODIFIED}t"
+    </FilesMatch>
+</IfModule>
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]
+
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82___lsphp .php .php8 .phtml
+</IfModule>

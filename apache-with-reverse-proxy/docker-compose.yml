@@ -1,0 +1,9 @@
+services:
+  php-app:
+    build: .
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - D:\Users\elliz\Downloads\Site-Mayara:/var/www/html
+    restart: unless-stopped
